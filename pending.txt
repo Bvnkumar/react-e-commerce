@@ -2,6 +2,7 @@
 * we should maintain the authentication using JWT token
 *should save the password after changed it into hashcode
 *Better to store small data(usedid and profile info) in redis.
+*Use bootstrap or flex for responsive.
 2)Add the social logins.
 3)Need to implement the reducx concept as much as possible.
 4)use nginx for proxy.
