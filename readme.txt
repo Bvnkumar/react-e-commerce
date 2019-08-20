@@ -1,6 +1,15 @@
 How to start the website:
-
-1)npm start /path/to/project
-
+1)go to website folder
+2)npm start /path/to/project
 Example: npm start --prefix /home/bvnkumar/practice/react/redux-sample/sample
+
+3)Then go to http://localhost:3000 in browser
+
+How to start the node-backend
+1)Go to node-backend folder
+2)nodemon
+
+*It will work run on 3001 port as we mentioned in www file.
+
+
 

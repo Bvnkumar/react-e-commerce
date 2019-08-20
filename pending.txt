@@ -1,4 +1,8 @@
-1)Create sub folder with name as 'node-backend';
-2)Try to add move all react files into website folder then try npm start
-3)Create a mongodb connection in app.js, it should be global visible, so that we can access it other touters as well.
-4)At first, we just add the signup and login funcationalites with jwt token.
+1)Create login,product and logout functionality
+* we should maintain the authentication using JWT token
+*should save the password after changed it into hashcode
+*Better to store small data(usedid and profile info) in redis.
+2)Add the social logins.
+3)Need to implement the reducx concept as much as possible.
+4)use nginx for proxy.
+5)use async module to maintain the asynchronous and to avioid callback hell.
