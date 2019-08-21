@@ -1,7 +1,7 @@
 How to start the website:
 1)go to website folder
 2)npm start /path/to/project
-Example: npm start --prefix /home/bvnkumar/practice/react/redux-sample/sample
+Example: npm start --prefix /home/bvnkumar/practice/react/react-ecommerce/website
 
 3)Then go to http://localhost:3000 in browser
 

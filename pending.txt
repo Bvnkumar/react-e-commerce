@@ -1,5 +1,5 @@
 1)Create login,product and logout functionality
-* we should maintain the authentication using JWT token
+*we should maintain the authentication using JWT token
 *should save the password after changed it into hashcode
 *Better to store small data(usedid and profile info) in redis.
 *Use bootstrap or flex for responsive.
