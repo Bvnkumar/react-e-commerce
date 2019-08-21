@@ -48,6 +48,11 @@ then((res)=> console.log("res.json() ", res.json())
                             <button className="btn btn-primary w-100" onClick={this.submitLogin}>Click</button>
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col-8 offset-2">
+                            <button className="btn btn-primary w-100" onClick={this.submitLogin}>Signup</button>
+                        </div>
+                    </div>
                 </div>
 
 
