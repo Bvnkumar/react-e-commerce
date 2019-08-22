@@ -1,12 +1,16 @@
 import React from 'react';
 import './signup.scss';
+
 class SignupComponent extends React.Component {
     constructor() {
         super()
         this.state = { firstname: '', lastname: '', email: '', password: '' };
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPassChange = this.onPassChange.bind(this);
-        this.submitLogin = this.submitLogin.bind(this);
+        this.onFirstNameChange = this.onFirstNameChange.bind(this);
+        this.onLastNameChange = this.onLastNameChange.bind(this);
+        this.submitSignup = this.submitSignup.bind(this);
+        this.goToLogin = this.goToLogin.bind(this);
 
     }
     onEmailChange(event) {
@@ -21,19 +25,21 @@ class SignupComponent extends React.Component {
     onLastNameChange(event) {
         this.setState({ lastname: event.target.value });
     }
-    submitLogin(event) {
-        console.log("this.state.email", this.state.email);
-        console.log("this.state.password", this.state.password)
-        fetch('http://localhost:3001/users/login', { method: "post", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) }).
+    submitSignup(event) {
+        fetch('http://localhost:3001/auth/signup', { method: "post", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) }).
             then((res) => console.log("res.json() ", res.json())
             )
+    }
+    goToLogin() {
+        const { history } = this.props;
+        history.push('/login');
     }
 
     render() {
         return (
             <div className="container">
                 <div className="loginBlock col-6">
-                <div className="row">
+                    <div className="row">
                         <div className="col-8 offset-2">
                             <div className="form-group">
                                 <label className="form-label">Firstname:</label>
@@ -65,18 +71,20 @@ class SignupComponent extends React.Component {
                             </div>
                         </div>
                     </div>
-                   
+
                     <div className="row">
                         <div className="col-8 offset-2">
-                            <button className="btn btn-primary w-100" onClick={this.submitLogin}>Click</button>
+                            <button className="btn btn-primary w-100" onClick={this.submitSignup}>Signup</button>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div className="row">
+                        <div className="col-8 offset-2">
+                            <button className="btn btn-primary w-100" onClick={this.goToLogin}>Login</button>
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                        <div className="col-8 offset-2">
-                            <button className="btn btn-primary w-100" onClick={this.submitLogin}>Login</button>
-                        </div>
-                    </div>
+
 
             </div>
         )

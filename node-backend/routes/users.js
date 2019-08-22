@@ -6,7 +6,7 @@ var MongoUtil=require('../lib/mongoUtil');
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.post('/login', function(req, res, next) {
+router.post('/signup', function(req, res, next) {
   var myobj=req.body;
  console.log("myobj ", myobj)
  var db=MongoUtil.getDb();
