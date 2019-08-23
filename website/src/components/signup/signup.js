@@ -6,7 +6,7 @@ let errorStyle ={
 class SignupComponent extends React.Component {
     constructor() {
         super()
-        this.state = { firstname: '', lastname: '', email: '', password: '',errors: {} };
+        this.state = { firstname: '', lastname: '', email: '', password: '',errors: {},validEmail:false };
         this.submitSignup = this.submitSignup.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -17,8 +17,13 @@ class SignupComponent extends React.Component {
         let errors = this.state.errors;
         if( !value ){
             errors[name] = "This field is required!!" ;
-         }
-         else {
+         }else if([name] == "email"){
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(this.state.email.match(mailformat)){
+                this.state.validEmail = true;
+                delete errors['email'];
+            }
+         } else {
              delete errors[name];
          }
         this.setState({[name] : value });
@@ -34,14 +39,16 @@ class SignupComponent extends React.Component {
         if(!this.state.lastname){
            errors.lastname = required;
         }
-        if(!this.state.email){
+        if(!this.state.validEmail){
             errors.email = required;
         }
         if(!this.state.password){
             errors.password = required;
         }
         this.setState({errors});
-        console.log("this.state",this.state);
+        if(Object.keys(errors).length){
+            return '';
+         }
         fetch('http://localhost:3001/auth/signup', { method: "post", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) }).
             then((res) => console.log("res.json() ", res.json())
             )
@@ -104,8 +111,6 @@ class SignupComponent extends React.Component {
                         </div>
                     </div>
                 </div>
-
-
             </div>
         )
     }
