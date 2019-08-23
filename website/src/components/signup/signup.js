@@ -26,8 +26,7 @@ class SignupComponent extends React.Component {
          } else {
              delete errors[name];
          }
-        this.setState({[name] : value });
-        this.setState({errors});
+        this.setState({[name] : value ,errors});
     }
     submitSignup(event) {
         event.preventDefault();
