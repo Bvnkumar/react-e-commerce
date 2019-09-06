@@ -3,6 +3,7 @@ import './signup.scss';
 let errorStyle ={
     color:"#d9534f"
 };
+let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 class SignupComponent extends React.Component {
     constructor() {
         super()
@@ -10,15 +11,15 @@ class SignupComponent extends React.Component {
         this.submitSignup = this.submitSignup.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
-
     }
 
     handleInputChange(name, value){
         let errors = this.state.errors;
+        const emailValid = "Please enter valid email";
         if( !value ){
             errors[name] = "This field is required!!" ;
-         }else if([name] == "email"){
-            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+         } else if([name] == "email"){
+            errors.email = emailValid;
             if(this.state.email.match(mailformat)){
                 this.state.validEmail = true;
                 delete errors['email'];
