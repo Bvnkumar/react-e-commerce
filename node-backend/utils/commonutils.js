@@ -5,7 +5,7 @@ module.exports={
         return uuidv1();
     },
     getToken:function(obj){
-        console.log("app.settings.secret ", app.settings.secret);
-        return jwt.sign(obj,app.settings.secret);
+        // console.log("app.settings.secret ", app.settings.secret);
+        return jwt.sign(obj,"ecommerce");
     }
 }

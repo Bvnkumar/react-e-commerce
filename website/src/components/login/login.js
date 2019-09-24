@@ -1,33 +1,66 @@
 import React from 'react';
 import './login.scss';
+import { object } from 'prop-types';
 
 class LoginComponent extends React.Component {
     constructor() {
         super()
-        this.state = { email: '', password: '' };
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPassChange = this.onPassChange.bind(this);
+        this.state = { email: '', password: '', emailError: '', passwordError: '' };
+        this.onChange = this.onChange.bind(this);
         this.submitLogin = this.submitLogin.bind(this);
         this.goToSignup = this.goToSignup.bind(this);
+        this.errosMsg='';
+    }
+    onChange = event => {
+        let me = this;
+        me.setState({ [event.target.name]: event.target.value });
+        this.validate();
+    }
+    validate = () => {
+        let errors = {};
+        if (!this.state.email && !this.state.password) {
+            this.setState({ emailError: "Email is required", passwordError: "password is required" });
+        }
+        else if (!this.state.email || !this.state.password) {
+            if (!this.state.email) {
+                this.setState({ emailError: "Email is required" });
+            } else if (!this.state.password) {
+                this.setState({ passwordError: "password is required" });
+            }
+            return false;
+        }
+        else {
+            this.setState({ emailError: "", passwordError: "" });
+            return true;
+        }
+    }
 
-    }
-    onEmailChange(event) {
-        this.setState({ email: event.target.value });
-    }
-    onPassChange(event) {
-        this.setState({ password: event.target.value });
-    }
     submitLogin(event) {
         var me = this;
         event.preventDefault();
-        fetch('http://localhost:3001/auth/login', { method: "post", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) }).
-            then((res) => {
-                return res.json();
+        let valid = me.validate();
+        let errosMsg;
+        if (!valid) {
+            console.log("in the error")
+            return false;
+        } else {
+            console.log("in the true")
+            fetch('http://localhost:3001/auth/login', { method: "post", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(this.state) }).
+                then((res) => {
+                    return res.json();
+                }).then(function (data) {
+                    console.log("data ", data);
+                    if (data.status) {
+                        document.cookie = "token=" + data.token;
+                        window.location.href = "/dashboard";
+                    }else{
+                        me.errosMsg=data.info;
+                        return false;
+                    }
 
-            }).then(function (data) {
-                console.log("data ", data);
-                document.cookie = "token=" + data.token;
-            })
+                })
+        }
+
     }
     goToSignup() {
         const { history } = this.props;
@@ -40,10 +73,12 @@ class LoginComponent extends React.Component {
                 <div className="loginBlock col-6">
                     <form noValidate>
                         <div className="row">
+                        {this.errosMsg?<div className="col-8 offset-2" style={{'color':'red'}}>{this.errosMsg}</div>:''}
                             <div className="col-8 offset-2">
                                 <div className="form-group">
-                                    <label className="form-label">Username:</label>
-                                    <input type="text" className="form-control" onChange={this.onEmailChange}></input>
+                                    <label className="form-label">Email:</label>
+                                    <input type="text" value={this.state.email} name="email" className="form-control" onChange={this.onChange}></input>
+                                    {this.state.emailError ? <span style={{ color: "red" }}>{this.state.emailError}</span> : null}
                                 </div>
                             </div>
                         </div>
@@ -51,19 +86,33 @@ class LoginComponent extends React.Component {
                             <div className="col-8 offset-2">
                                 <div className="form-group">
                                     <label className="form-label">Password:</label>
+<<<<<<< HEAD
                                     <input type="password" className="form-control" onChange={this.onPassChange}></input>
+=======
+                                    <input type="password" value={this.state.password} name="password" className="form-control" onChange={this.onChange}></input>
+                                    {this.state.passwordError ? <span style={{ color: "red" }}>{this.state.passwordError}</span> : null}
+
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-8 offset-2">
+<<<<<<< HEAD
                                 <button className="btn btn-primary w-100" onClick={this.submitLogin}>Login</button>
+=======
+                                <button className="bgBlueviolet btn btn-primary w-100" onClick={this.submitLogin}>Login</button>
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                             </div>
                         </div>
                         <br></br>
                         <div className="row">
                             <div className="col-8 offset-2">
+<<<<<<< HEAD
                                 <button className="btn btn-primary w-100" onClick={this.goToSignup}>Signup</button>
+=======
+                                <button className="bgBlueviolet btn btn-primary w-100" onClick={this.goToSignup}>Signup</button>
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                             </div>
                         </div>
                     </form>

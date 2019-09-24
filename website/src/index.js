@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import LoginComponent from './components/login/login';
 import SignupComponent from './components/signup/signup';
+import DashboardComponent from './components/dashboard'
 
 const routing = (
     <Router>
@@ -14,6 +15,7 @@ const routing = (
             <Route exact path="/" component={LoginComponent} />
             <Route path="/login" component={LoginComponent} />
             <Route path="/signup" component={SignupComponent} />
+            <Route path="/dashboard" component={DashboardComponent}/>
         </div>
     </Router>
 )

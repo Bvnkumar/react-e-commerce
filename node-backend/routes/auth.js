@@ -32,16 +32,22 @@ authRouter.post('/login', function (req, res) {
             logger.log("error", "Error occured while connected to db")
             res.send({ status: false, info: "Got an error" });
         } else {
-            bcrypt.compare(data.password, result.password, function (err, hash) {
-                if (hash) {
-                    let token = jwt.sign({ user_id: result.user_id }, "ecommerce");
-                    logger.log("info", "Password is matched")
-                    res.send({ status: true, info: "Password matched", token: token });
-                } else {
-                    logger.log("error", "Password is not matched")
-                    res.send({ status: true, info: "Password is not matched" });
-                }
-            });
+            if(result){
+                bcrypt.compare(data.password, result.password, function (err, hash) {
+                    if (hash) {
+                        let token = jwt.sign({ user_id: result.user_id }, "ecommerce");
+                        logger.log("info", "Password is matched")
+                        res.send({ status: true, info: "Password matched", token: token });
+                    } else {
+                        logger.log("error", "Password is not matched")
+                        res.send({ status: false, info: "Password is not matched" });
+                    }
+                });
+            }else{
+                logger.log("error", "Email is not found")
+                res.send({ status: false, info: "Email is not found" });
+            }
+         
         }
     })
 

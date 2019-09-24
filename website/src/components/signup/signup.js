@@ -3,7 +3,10 @@ import './signup.scss';
 let errorStyle ={
     color:"#d9534f"
 };
+<<<<<<< HEAD
 let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+=======
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
 class SignupComponent extends React.Component {
     constructor() {
         super()
@@ -11,15 +14,26 @@ class SignupComponent extends React.Component {
         this.submitSignup = this.submitSignup.bind(this);
         this.goToLogin = this.goToLogin.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
     }
 
     handleInputChange(name, value){
         let errors = this.state.errors;
+<<<<<<< HEAD
         const emailValid = "Please enter valid email";
         if( !value ){
             errors[name] = "This field is required!!" ;
          } else if([name] == "email"){
             errors.email = emailValid;
+=======
+        if( !value ){
+            errors[name] = "This field is required!!" ;
+         }else if([name] == "email"){
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
             if(this.state.email.match(mailformat)){
                 this.state.validEmail = true;
                 delete errors['email'];
@@ -61,7 +75,11 @@ class SignupComponent extends React.Component {
     render() {
         return (
             <div className="container">
+<<<<<<< HEAD
                 <div className="loginBlock col-6">
+=======
+                <div className="signupBlock col-6">
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                     <div className="row">
                         <div className="col-8 offset-2">
                             <div className="form-group">
@@ -101,13 +119,21 @@ class SignupComponent extends React.Component {
 
                     <div className="row">
                         <div className="col-8 offset-2">
+<<<<<<< HEAD
                             <button className="btn btn-primary w-100" onClick={this.submitSignup}>Signup</button>
+=======
+                            <button className="bgBLueviolet btn btn-primary w-100" onClick={this.submitSignup}>Signup</button>
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                         </div>
                     </div>
                     <br></br>
                     <div className="row">
                         <div className="col-8 offset-2">
+<<<<<<< HEAD
                             <button className="btn btn-primary w-100" onClick={this.goToLogin}>Login</button>
+=======
+                            <button className="bgBLueviolet btn btn-primary w-100" onClick={this.goToLogin}>Login</button>
+>>>>>>> 631533c8cd7fc6472dd5d0b899a9311ae34db897
                         </div>
                     </div>
                 </div>
